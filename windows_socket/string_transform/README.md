@@ -1,0 +1,1 @@
+server端和client端都在物理机下
