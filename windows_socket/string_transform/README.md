@@ -1,1 +1,2 @@
 server端和client端都在物理机下
+client端中，要访问的server的地址应该为serverd所在的机器的IP地址
