@@ -24,7 +24,7 @@ WORD sockVersion = MAKEWORD(2,2);
 		   printf("Init Socket Error!\n");
 		   return 0;}
 		   
-	// °ó¶¨socketµ½Ò»¸ö±¾µØµØÖ·
+	// ç»‘å®šsocketåˆ°ä¸€ä¸ªæœ¬åœ°åœ°å€
 	sockaddr_in sin;
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(SERVER_PORT);
@@ -34,7 +34,7 @@ WORD sockVersion = MAKEWORD(2,2);
 	   printf("Bind Error!\n");
 	   return 0;}
 	   
-	// ÉèÖÃsocket½øÈë¼àÌý×´Ì¬
+	// è®¾ç½®socketè¿›å…¥ç›‘å¬çŠ¶æ€
 	if (listen(sListen, 10) == SOCKET_ERROR){
 	   printf("Listen Error!\n");
 	   return 0;}
@@ -45,19 +45,19 @@ WORD sockVersion = MAKEWORD(2,2);
       
     while (true)    
     {    
-        printf("µÈ´ýÁ¬½Ó...\n");    
+        printf("ç­‰å¾…è¿žæŽ¥...\n");    
         sClient = accept(sListen, (SOCKADDR *)&remoteAddr, &nAddrlen);
-		//µÈ´ý¿Í»§¶Ë½ÓÈëSOCKET Command_Sock = accept(Listen_Sock,...)
-		//ËüÌáÈ¡³öËù¼àÌýÌ×½Ó×ÖµÄµÈ´ýÁ¬½Ó¶ÓÁÐÖÐµÚÒ»¸öÁ¬½ÓÇëÇó£¬´´½¨Ò»¸öÐÂµÄÌ×½Ó×Ö£¬²¢·µ»ØÖ¸Ïò¸ÃÌ×½Ó×ÖµÄÎÄ¼þÃèÊö·û¡£
-		//ÐÂ½¨Á¢µÄÌ×½Ó×Ö²»ÔÚ¼àÌý×´Ì¬£¬Ô­À´Ëù¼àÌýµÄÌ×½Ó×ÖÒ²²»ÊÜ¸ÃÏµÍ³µ÷ÓÃµÄÓ°Ïì£¬ÐÂ½¨Á¢µÄÌ×½Ó×Ö×¼±¸·¢ËÍsend()ºÍ½ÓÊÕÊý¾Ýrecv()¡£¡£    
-        //remoteAddr:¸Ã½á¹¹ÓÃÍ¨Ñ¶²ã·þÎñÆ÷¶ÔµÈÌ×½Ó×ÖµÄµØÖ·(Ò»°ãÎª¿Í»§¶ËµØÖ·)ÌîÐ´£¬·µ»ØµØÖ·addrµÄÈ·ÇÐ¸ñÊ½ÓÉÌ×½Ó×ÖµÄµØÖ·Àà±ð(±ÈÈçTCP»òUDP)¾ö¶¨
-		//ÊÇ¸öÖ¸Ïò¾Ö²¿Êý¾Ý½á¹¹sockaddr_inµÄÖ¸Õë£¬Õâ¾ÍÊÇÒªÇó½ÓÈëµÄÐÅÏ¢±¾µØµÄÌ×½Ó×Ö(µØÖ·ºÍÖ¸Õë) 
+		//ç­‰å¾…å®¢æˆ·ç«¯æŽ¥å…¥SOCKET Command_Sock = accept(Listen_Sock,...)
+		//å®ƒæå–å‡ºæ‰€ç›‘å¬å¥—æŽ¥å­—çš„ç­‰å¾…è¿žæŽ¥é˜Ÿåˆ—ä¸­ç¬¬ä¸€ä¸ªè¿žæŽ¥è¯·æ±‚ï¼Œåˆ›å»ºä¸€ä¸ªæ–°çš„å¥—æŽ¥å­—ï¼Œå¹¶è¿”å›žæŒ‡å‘è¯¥å¥—æŽ¥å­—çš„æ–‡ä»¶æè¿°ç¬¦ã€‚
+		//æ–°å»ºç«‹çš„å¥—æŽ¥å­—ä¸åœ¨ç›‘å¬çŠ¶æ€ï¼ŒåŽŸæ¥æ‰€ç›‘å¬çš„å¥—æŽ¥å­—ä¹Ÿä¸å—è¯¥ç³»ç»Ÿè°ƒç”¨çš„å½±å“ï¼Œæ–°å»ºç«‹çš„å¥—æŽ¥å­—å‡†å¤‡å‘é€send()å’ŒæŽ¥æ”¶æ•°æ®recv()ã€‚ã€‚    
+        //remoteAddr:è¯¥ç»“æž„ç”¨é€šè®¯å±‚æœåŠ¡å™¨å¯¹ç­‰å¥—æŽ¥å­—çš„åœ°å€(ä¸€èˆ¬ä¸ºå®¢æˆ·ç«¯åœ°å€)å¡«å†™ï¼Œè¿”å›žåœ°å€addrçš„ç¡®åˆ‡æ ¼å¼ç”±å¥—æŽ¥å­—çš„åœ°å€ç±»åˆ«(æ¯”å¦‚TCPæˆ–UDP)å†³å®š
+		//æ˜¯ä¸ªæŒ‡å‘å±€éƒ¨æ•°æ®ç»“æž„sockaddr_inçš„æŒ‡é’ˆï¼Œè¿™å°±æ˜¯è¦æ±‚æŽ¥å…¥çš„ä¿¡æ¯æœ¬åœ°çš„å¥—æŽ¥å­—(åœ°å€å’ŒæŒ‡é’ˆ) 
 		if(sClient == INVALID_SOCKET)    
         {    
             printf("accept error !");    
             continue;    
         }    
-        printf("½ÓÊÜµ½Ò»¸öÁ¬½Ó£º%s \r\n", inet_ntoa(remoteAddr.sin_addr));    
+        printf("æŽ¥å—åˆ°ä¸€ä¸ªè¿žæŽ¥ï¼š%s \r\n", inet_ntoa(remoteAddr.sin_addr));    
   
         char buffer[BUFFER_SIZE];  
         char file_name[FILE_NAME_MAX_SIZE+1];
@@ -68,10 +68,12 @@ WORD sockVersion = MAKEWORD(2,2);
             break;  
         }   
 
-  // ¶ÔÎÄ¼þÂ·¾¶Ãû½øÐÐÒ»Ð©´¦Àí
+  // å¯¹æ–‡ä»¶è·¯å¾„åè¿›è¡Œä¸€äº›å¤„ç†
     file_name[ret]='\0';
+	    
 	char *p1, *p2;
 	char filename[FILE_NAME_MAX_SIZE+1];
+	memset(filename, '\0', FILE_NAME_MAX_SIZE+1);  
 	
   	for (p1 = file_name, p2 =filename;'\0' != *p1;++p1, ++p2)
 		{
@@ -83,7 +85,7 @@ WORD sockVersion = MAKEWORD(2,2);
 		}
 	*p2 = '\0';
 	
-        // ´ò¿ªÎÄ¼þ²¢¶ÁÈ¡ÎÄ¼þÊý¾Ý  
+        // æ‰“å¼€æ–‡ä»¶å¹¶è¯»å–æ–‡ä»¶æ•°æ®  
         FILE *fp; 
         if (NULL == (fp = fopen(filename, "rb")))
         {  
@@ -93,7 +95,7 @@ WORD sockVersion = MAKEWORD(2,2);
        
            memset(buffer, 0, BUFFER_SIZE);  
             int length = 0;  
-            // Ã¿¶ÁÈ¡Ò»¶ÎÊý¾Ý£¬±ã½«Æä·¢ËÍ¸ø¿Í»§¶Ë£¬Ñ­»·Ö±µ½ÎÄ¼þ¶ÁÍêÎªÖ¹  
+            // æ¯è¯»å–ä¸€æ®µæ•°æ®ï¼Œä¾¿å°†å…¶å‘é€ç»™å®¢æˆ·ç«¯ï¼Œå¾ªçŽ¯ç›´åˆ°æ–‡ä»¶è¯»å®Œä¸ºæ­¢  
             while((length = fread(buffer, sizeof(char), BUFFER_SIZE, fp)) > 0)  
             {  
                 if(send(sClient, buffer, length, 0) < 0)  
@@ -104,14 +106,14 @@ WORD sockVersion = MAKEWORD(2,2);
                memset(buffer, 0, BUFFER_SIZE);
             }  
   
-            // ¹Ø±ÕÎÄ¼þ  
+            // å…³é—­æ–‡ä»¶  
             fclose(fp);  
             printf("File:%s Transfer Successful!\n", file_name);  
          
-        // ¹Ø±ÕÓë¿Í»§¶ËµÄÁ¬½Ó  
+        // å…³é—­ä¸Žå®¢æˆ·ç«¯çš„è¿žæŽ¥  
         	closesocket(sClient);  
     }  
-    // ¹Ø±Õ¼àÌýÓÃµÄsocket  
+    // å…³é—­ç›‘å¬ç”¨çš„socket  
   	closesocket(sListen);  
     return 0;  
 }  
