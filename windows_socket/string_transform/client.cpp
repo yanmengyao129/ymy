@@ -1,4 +1,4 @@
-//Á÷³Ì£º¼ÓÔØws2_32.dll    ==¡· ´´½¨Ì××Ö½Ú ==¡· °ó¶¨¶Ë¿Ú  ==¡·¼àÌı  ==¡· ½ÓÊÕ/·¢ËÍ  ==¡· ¹Ø±ÕÌ××Ö½Ú   ==¡· ÊÍ·Åws2_32.dll
+//æµç¨‹ï¼šåŠ è½½ws2_32.dll    ==ã€‹ åˆ›å»ºå¥—å­—èŠ‚ ==ã€‹ ç»‘å®šç«¯å£  ==ã€‹ç›‘å¬  ==ã€‹ æ¥æ”¶/å‘é€  ==ã€‹ å…³é—­å¥—å­—èŠ‚   ==ã€‹ é‡Šæ”¾ws2_32.dll
 #include<WINSOCK2.H>  
 #include<STDIO.H>  
 #include<iostream>  
@@ -8,16 +8,16 @@ using namespace std;
   
 int main()  
 {  
-    WORD sockVersion = MAKEWORD(2, 2); //Ö¸Ã÷Ï£ÍûÊ¹ÓÃµÄwinsock°æ±¾ºÅ 
-    WSADATA data;  //WSA½á¹¹Ìå 
+    WORD sockVersion = MAKEWORD(2, 2); //æŒ‡æ˜å¸Œæœ›ä½¿ç”¨çš„winsockç‰ˆæœ¬å· 
+    WSADATA data;  //WSAç»“æ„ä½“ 
 
-    if(WSAStartup(sockVersion, &data)!=0) //WSAStartup()º¯Êı½øĞĞ³õÊ¼»¯£¬ 
+    if(WSAStartup(sockVersion, &data)!=0) //WSAStartup()å‡½æ•°è¿›è¡Œåˆå§‹åŒ–ï¼Œ 
     {  
-        return 0;  //³õÊ¼»¯socket×ÊÔ´£¬return´ú±íÊ§°Ü 
+        return 0;  //åˆå§‹åŒ–socketèµ„æºï¼Œreturnä»£è¡¨å¤±è´¥ 
     }  
     
     while(true){ 
-	//´´½¨Ì×½Ó×Ö £¬ ¹¹ÔìÍ¨Ñ¶SOCKET£¬Á÷Ê½SOCKET
+	//åˆ›å»ºå¥—æ¥å­— ï¼Œ æ„é€ é€šè®¯SOCKETï¼Œæµå¼SOCKET
         SOCKET sclient = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);  
         if(sclient == INVALID_SOCKET)  
         {  
@@ -25,14 +25,14 @@ int main()
             return 0;  
         }  
         
-        //ÅäÖÃÒªÁ¬½ÓµÄµØÖ·ºÍ¶Ë¿Ú   
+        //é…ç½®è¦è¿æ¥çš„åœ°å€å’Œç«¯å£   
         sockaddr_in serAddr;  
         serAddr.sin_family = AF_INET;  
         serAddr.sin_port = htons(8888);  
-        serAddr.sin_addr.S_un.S_addr = inet_addr("172.24.13.15");  
+        serAddr.sin_addr.S_un.S_addr = inet_addr("172.24.13.15");  //è¿™é‡Œåº”è¯¥æ—¶serveræ‰€åœ¨çš„æœºå™¨çš„IPåœ°å€
         if(connect(sclient, (sockaddr *)&serAddr, sizeof(serAddr)) == SOCKET_ERROR)  
-        //¿Í»§¶Ë£ºÇëÇóÓë·şÎñ¶ËÁ¬½Óint ret = connect(Client_Sock, ...) 
-		{  //Á¬½ÓÊ§°Ü   
+        //å®¢æˆ·ç«¯ï¼šè¯·æ±‚ä¸æœåŠ¡ç«¯è¿æ¥int ret = connect(Client_Sock, ...) 
+		{  //è¿æ¥å¤±è´¥   
             printf("connect error !");  
             closesocket(sclient);  
             return 0;  
@@ -42,9 +42,9 @@ int main()
         cin>>data;  
         if(data=="exit")break;
         const char * sendData;  
-        sendData = data.c_str();   //string×ªconst char*   
+        sendData = data.c_str();   //stringè½¬const char*   
         send(sclient, sendData, strlen(sendData), 0);  
-        //send()ÓÃÀ´½«Êı¾İÓÉÖ¸¶¨µÄsocket´«¸ø¶Ô·½Ö÷»ú £© 
+        //send()ç”¨æ¥å°†æ•°æ®ç”±æŒ‡å®šçš„socketä¼ ç»™å¯¹æ–¹ä¸»æœº ï¼‰ 
           
         char recData[255];  
         int ret = recv(sclient, recData, 255, 0);  
@@ -58,7 +58,7 @@ int main()
       
       
     WSACleanup();  
-    //¹Ø±ÕÌ×½Ó×Ö£¬¹Ø±Õ¼ÓÔØµÄÌ×½Ó×Ö¿â£¨closesocket()/WSACleanup()£©£» 
+    //å…³é—­å¥—æ¥å­—ï¼Œå…³é—­åŠ è½½çš„å¥—æ¥å­—åº“ï¼ˆclosesocket()/WSACleanup()ï¼‰ï¼› 
     return 0;  
       
 }  
