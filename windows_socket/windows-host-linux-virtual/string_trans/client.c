@@ -17,8 +17,10 @@
     int main() {  
         int sockfd, recvbytes;    
         struct sockaddr_in serv_addr;
+        //创建套接字
   
- while(1){     
+ while(1){ 
+     //保存服务器端口和ip地址信息
         if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {  
             perror("socket error!");  
             exit(1);  
@@ -29,7 +31,7 @@
         serv_addr.sin_port = htons(8888);  
         serv_addr.sin_addr.s_addr = inet_addr("172.24.13.15");  
       
-
+//连接成功，传送字符
         if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(struct sockaddr))== -1) {  
             perror("connect error!");  
             exit(1);  
@@ -54,7 +56,7 @@
         }  
        
    
-        close(sockfd);
+        close(sockfd);//关闭套接字
 }  
  close(sockfd);
         return 0;  
